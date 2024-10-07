@@ -6,15 +6,13 @@ class Authenticator
 {
     public function attempt($email, $password)
     {
-        $user = App::resolve(Database::class)
-            ->query('select * from users where email = :email', [
-            'email' => $email
-        ])->find();
+        // Use MeekroDB to query the users table
+        $user = DB::queryFirstRow('SELECT * FROM users WHERE email = %s', $email);
 
         if ($user) {
             if (password_verify($password, $user['password'])) {
                 $this->login([
-                    'email' => $email
+                    'email' => $user['email']
                 ]);
 
                 return true;
@@ -27,6 +25,7 @@ class Authenticator
     public function login($user)
     {
         $_SESSION['user'] = [
+            'first' => $user['first_name'],
             'email' => $user['email']
         ];
 

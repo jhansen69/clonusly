@@ -1,27 +1,24 @@
 {
-  "name": "jeffreyway/demo",
+  "name": "jhansen69/clonusly",
   "authors": [
     {
-      "name": "Jeffrey Way",
-      "email": "jeffrey@jeffrey-way.com"
+      "name": "Joe Hansen",
+      "email": "jhansen69@gmail.com"
     }
   ],
   "require": {
     "illuminate/collections": "^10.9",
-    "ext-pdo": "*"
+    "ext-pdo": "*",
+    "sergeytsalkov/meekrodb": "^3.1",
+    "sendgrid/sendgrid": "~7",
+    "vlucas/phpdotenv": "^5.6",
+    "robmorgan/phinx": "^0.16.5",
+    "fakerphp/faker": "^1.23"
   },
   "autoload": {
     "psr-4": {
       "Core\\": "Core/",
       "Http\\": "Http/"
-    }
-  },
-  "require-dev": {
-    "pestphp/pest": "^2.5"
-  },
-  "config": {
-    "allow-plugins": {
-      "pestphp/pest-plugin": true
     }
   }
 }

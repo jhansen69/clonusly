@@ -2,10 +2,17 @@
 <?php require('partials/nav.php') ?>
 <?php require('partials/banner.php') ?>
 
-<main>
-    <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-        <p>Hello, <?= $_SESSION['user']['email'] ?? 'Guest' ?>. Welcome to the home page.</p>
-    </div>
-</main>
+    <section class="hero">
+        <figure class="image">
+            <img src="/assets/images/logo-large.png">
+        </figure>
+    </section>
+    <main>
+        <div class="">
+            <p>Hello, <?= $_SESSION['user']['first_name'] ?? 'Guest' ?>. Welcome to the home page.</p>
+        </div>
+    </main>
+    <button id="testButton">Click me</button>
+    
 
 <?php require('partials/footer.php') ?>
