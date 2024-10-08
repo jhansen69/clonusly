@@ -26,18 +26,6 @@ DB::$dbName = $_ENV['DB_NAME'];
 DB::$user = $_ENV['DB_USER'];
 DB::$password = $_ENV['DB_PASS'];
 
-// Test the connection with a simple query
-try {
-    $results = DB::query('SELECT * FROM users');
-    foreach ($results as $row) {
-        echo "<pre>";
-        print_r($row);
-        echo "</pre>";
-    }
-} catch (MeekroDBException $e) {
-    echo 'Error: ' . $e->getMessage();
-}
-
 $router = new \Core\Router();
 require BASE_PATH . 'routes.php';
 

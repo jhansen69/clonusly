@@ -26,8 +26,8 @@ class UserSeeder extends AbstractSeed
                 'last_name'  => $faker->lastName,
                 'email'      => $faker->unique()->safeEmail,
                 'password'   => password_hash('password123', PASSWORD_BCRYPT), // Hashed password
-                'created'    => date('Y-m-d H:i:s'),
-                'updated'    => date('Y-m-d H:i:s'),
+                'created_at'    => date('Y-m-d H:i:s'),
+                'updated_at'    => date('Y-m-d H:i:s'),
             ];
         }
 
