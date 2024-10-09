@@ -24,7 +24,7 @@ function generateUUID($data = null) {
 * Posting to slack
 */
 function postToSlackChannel($channel, $message) {
-    $token = 'xoxb-7847770270485-7850554340931-U23UXn8mos4oYrkAj4uwSk0C';
+    $token = $_ENV['SLACK_BOT_TOKEN'];
     $url = 'https://slack.com/api/chat.postMessage';
     
     $data = [
