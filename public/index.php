@@ -42,5 +42,3 @@ try {
 }
 
 Session::unflash();
-
-

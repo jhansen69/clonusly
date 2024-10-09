@@ -19,4 +19,12 @@ $router->post('/register', 'registration/store.php')->only('guest');
 
 $router->get('/login', 'session/create.php')->only('guest');
 $router->post('/session', 'session/store.php')->only('guest');
-$router->delete('/session', 'session/destroy.php')->only('auth');
+$router->delete('/logout', 'session/destroy.php')->only('auth');
+
+
+/* ADMIN routes */
+$router->get('/admin', 'admin/index.php')->only('admin');
+
+
+/* API routes */
+$router->api('/files/upload', 'files/upload.php', 'POST');

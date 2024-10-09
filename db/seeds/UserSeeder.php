@@ -30,7 +30,15 @@ class UserSeeder extends AbstractSeed
                 'updated_at'    => date('Y-m-d H:i:s'),
             ];
         }
-
+        $data[] = [
+            'first_name' => "Joe",
+            'last_name'  => "Hansen",
+            'email'      => "jhansen69+clonusly@gmail.com",
+            'password'   => password_hash('password123', PASSWORD_BCRYPT), // Hashed password
+            'is_admin'   => 1,
+            'created_at'    => date('Y-m-d H:i:s'),
+            'updated_at'    => date('Y-m-d H:i:s'),
+        ];
         // Insert the generated data into the users table
         $this->table('users')->insert($data)->saveData();
     }

@@ -54,19 +54,6 @@ class Router
         return $this;
     }
 
-    public function route($uri, $method)
-    {
-        foreach ($this->routes as $route) {
-            if ($route['uri'] === $uri && $route['method'] === strtoupper($method)) {
-                Middleware::resolve($route['middleware']);
-
-                return require base_path('Http/controllers/' . $route['controller']);
-            }
-        }
-
-        $this->abort();
-    }
-
     public function previousUrl()
     {
         return $_SERVER['HTTP_REFERER'];
@@ -79,5 +66,41 @@ class Router
         require base_path("views/{$code}.php");
 
         die();
+    }
+
+    public function api($uri, $controller, $method = 'GET')
+    {
+        $apiUri = '/api' . $uri;
+        $apiController = "api/".$controller;
+        $this->add($method, $apiUri, $apiController);
+
+        return $this;
+    }
+
+    public function route($uri, $method)
+    {
+        foreach ($this->routes as $route) {
+            if ($route['uri'] === $uri && $route['method'] === strtoupper($method)) {
+                Middleware::resolve($route['middleware']);
+
+                $response = require base_path('Http/controllers/' . $route['controller']);
+                
+                if ($this->isApiRequest($uri)) {
+                    header('Content-Type: application/json');
+                    echo json_encode($response);
+                } else {
+                    return $response;
+                }
+
+                return;
+            }
+        }
+
+        $this->abort();
+    }
+
+    protected function isApiRequest($uri)
+    {
+        return strpos($uri, '/api') === 0;
     }
 }

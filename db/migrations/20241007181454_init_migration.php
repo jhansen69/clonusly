@@ -25,6 +25,8 @@ final class InitMigration extends AbstractMigration
             ->addColumn('last_name', 'string', ['limit' => 100])
             ->addColumn('email', 'string', ['limit' => 100])
             ->addColumn('password', 'string', ['limit' => 100])
+            ->addColumn('remember_token', 'string', ['limit' => 100])
+            ->addColumn('is_admin','boolean',['default'=>0])
             ->addIndex(['email'], ['unique' => true])
             ->addTimestampsWithTimezone()
             ->create();

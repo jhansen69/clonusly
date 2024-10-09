@@ -5,6 +5,54 @@ use Core\Response;
 // Import the SendGrid classes
 use SendGrid\Mail\Mail; 
 
+
+function generateUUID($data = null) {
+    // Generate 16 bytes (128 bits) of random data or use the data passed into the function.
+    $data = $data ?? random_bytes(16);
+    assert(strlen($data) == 16);
+
+    // Set version to 0100
+    $data[6] = chr(ord($data[6]) & 0x0f | 0x40);
+    // Set bits 6-7 to 10
+    $data[8] = chr(ord($data[8]) & 0x3f | 0x80);
+
+    // Output the 36 character UUID.
+    return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
+}
+
+/*
+* Posting to slack
+*/
+function postToSlackChannel($channel, $message) {
+    $token = 'xoxb-7847770270485-7850554340931-U23UXn8mos4oYrkAj4uwSk0C';
+    $url = 'https://slack.com/api/chat.postMessage';
+    
+    $data = [
+        'channel' => $channel,
+        'text' => $message
+    ];
+    
+    $headers = [
+        'Content-Type: application/json; charset=utf-8',
+        'Authorization: Bearer ' . $token
+    ];
+    
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    
+    $response = curl_exec($ch);
+    curl_close($ch);
+    
+    return json_decode($response);
+
+    // Usage
+$userName = $_SESSION['user']['first_name'] ?? "Guest";
+//$response = postToSlackChannel('#social', "Hello, Slack! This is a test message from Clonusly and $userName.");
+}
+
 function dd($value)
 {
     echo "<pre>";
