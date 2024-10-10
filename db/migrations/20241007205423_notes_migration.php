@@ -23,7 +23,7 @@ final class NotesMigration extends AbstractMigration
         $table->addColumn('title', 'string', ['limit' => 100])
             ->addColumn('note', 'text')
             ->addColumn('user_id', 'integer', ['signed' => false]) // Unsigned to match users.id
-            ->addTimestampsWithTimezone()
+            ->addTimestamps()
             // Define the foreign key to 'users' table
             ->addForeignKey('user_id', 'users', 'id', [
                 'delete' => 'CASCADE', 

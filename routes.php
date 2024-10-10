@@ -24,7 +24,10 @@ $router->delete('/logout', 'session/destroy.php')->only('auth');
 
 /* ADMIN routes */
 $router->get('/admin', 'admin/index.php')->only('admin');
+$router->get('/admin/playground', 'admin/playground.php')->only('admin');
 
 
 /* API routes */
 $router->api('/files/upload', 'files/upload.php', 'POST');
+$router->api('/keywords/search', 'keywords/search.php', 'GET');
+
